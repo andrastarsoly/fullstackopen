@@ -43,7 +43,7 @@ const App = () => {
       <Stat text="bad" counter={bad}/>
       <Stat text="all" counter={good + neutral + bad}/>
       <Stat text="avarage" counter={(good - bad)/(good + neutral + bad)}/>
-      <Stat text="positive" counter={(good / (good + neutral + bad))*100}/> 
+      <Stat text="positive" counter={(good / (good + neutral + bad))*100 + "%"}/> 
     </div>
   )
 } 
