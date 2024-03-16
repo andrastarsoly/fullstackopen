@@ -2,13 +2,32 @@ import { useState } from 'react'
 
 
 
-const SectionHeader = ({ title }) => <h1>{title}</h1>
-
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
-const Stat = ({ text, counter }) => <p> {text} {counter}</p>
+const StatisticLine  = ({ text, counter }) => <p> {text} {counter}</p>
 
-  
+const Statistics = (props) => {
+  return(
+    <div>
+    { ((props.good + props.bad + props.neutral) == 0)
+      ? 
+      <div>
+      No feedback was given
+      </div>
+      :
+      <div>
+        <StatisticLine text="good" counter={props.good}/>
+        <StatisticLine text="neutral" counter={props.neutral}/>
+        <StatisticLine text="bad" counter={props.bad}/>
+        <StatisticLine text="all" counter={props.good + props.neutral + props.bad}/>
+        <StatisticLine text="avarage" counter={(props.good - props.bad)/(props.good + props.neutral + props.bad)}/>
+        <StatisticLine text="positive" counter={(props.good / (props.good + props.neutral + props.bad))*100 + "%"}/> 
+      </div>
+    }
+    </div>
+  )
+
+}
 
 
 const App = () => {
@@ -26,7 +45,7 @@ const App = () => {
 
   return (
     <div>
-      <SectionHeader title = "give feedback"/>
+      <h1>give feedback</h1>
       <Button 
         onClick={handleGoodClick}
         text="good"
@@ -37,13 +56,9 @@ const App = () => {
       <Button onClick={handleBadClick}
         text="bad"
       />
-      <SectionHeader title = "statistics"/>
-      <Stat text="good" counter={good}/>
-      <Stat text="neutral" counter={neutral}/>
-      <Stat text="bad" counter={bad}/>
-      <Stat text="all" counter={good + neutral + bad}/>
-      <Stat text="avarage" counter={(good - bad)/(good + neutral + bad)}/>
-      <Stat text="positive" counter={(good / (good + neutral + bad))*100 + "%"}/> 
+      <h1>statistics</h1>
+      <Statistics good={good} neutral={neutral} bad={bad}/>
+
     </div>
   )
 } 
