@@ -18,7 +18,6 @@ const App = () => {
   const [search, setSearch] = useState(persons)
 
 
-
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -28,10 +27,10 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    const nf = event.target.value
-    setFilter(nf);
+    const filt = event.target.value
+    setFilter(filt);
     if(event.target.value != ''){
-      setSearch(persons.filter(person => person.name.toLowerCase().startsWith(nf.toLowerCase())))
+      setSearch(persons.filter(person => person.name.toLowerCase().startsWith(filt.toLowerCase())))
     }
     else{
       setSearch(persons)
@@ -51,14 +50,13 @@ const App = () => {
       setPersons(persons.concat(personObject))
       setNewName('')
       setNewNumber('')
+      handleFilterChange({ target: { value: filter } })
     }
     else{
       console.log(found)
       alert(`${personObject.name} is already added to the phonebook`)
     }
   }
-
-
 
   return (
     <div>
