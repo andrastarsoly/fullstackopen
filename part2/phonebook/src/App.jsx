@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas' },
+    { name: 'Asd Asd' }
   ]) 
   const [newName, setNewName] = useState('')
 
@@ -19,20 +20,32 @@ const App = () => {
       name: newName,
     }
   
-    setPersons(persons.concat(personObject))
-    setNewName('')
+    const found = persons.find((element) => element.name === personObject.name);
+
+    if(found === undefined){
+      setPersons(persons.concat(personObject))
+      setNewName('')
+    }
+    else{
+      console.log(found)
+      alert(`${personObject.name} is already added to the phonebook`)
+    }
+    
   }
+
 
 
   return (
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
-        name:
-        <input
+        <div>
+          name:
+          <input
           value={newName}
           onChange={handleNameChange}
         />
+        </div>
         <button type="submit">add</button>
       </form>   
       <h2>Numbers</h2>
