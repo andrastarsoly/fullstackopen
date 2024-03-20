@@ -15,7 +15,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  const [filtering, setFiltering] = useState('false')
+  const [search, setSearch] = useState(persons)
 
 
 
@@ -30,17 +30,13 @@ const App = () => {
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
     if(event.target.value != ''){
-      setFiltering(true)
+      setSearch(persons.filter(person => person.name.startsWith(newFilter)))
     }
     else{
-      setFiltering(false)
+      setSearch(persons)
     }
-    const search = filtering
-    ? persons
-    : persons.filter(item => item.name.toLowerCase().startsWith(newFilter));
-    setPersons(search);
-  }
 
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -92,7 +88,7 @@ const App = () => {
       </form>   
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person => <li key={person.name}> {person.name} {person.number}</li>)} 
+        {search.map(person => <li key={person.name}> {person.name} {person.number}</li>)} 
       </ul>
 
     </div>
