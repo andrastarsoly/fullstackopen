@@ -14,7 +14,7 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [newFilter, setNewFilter] = useState('')
+  const [filter, setFilter] = useState('')
   const [search, setSearch] = useState(persons)
 
 
@@ -28,14 +28,14 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    setNewFilter(event.target.value)
+    const nf = event.target.value
+    setFilter(nf);
     if(event.target.value != ''){
-      setSearch(persons.filter(person => person.name.startsWith(newFilter)))
+      setSearch(persons.filter(person => person.name.toLowerCase().startsWith(nf.toLowerCase())))
     }
     else{
       setSearch(persons)
     }
-
   }
 
   const addPerson = (event) => {
@@ -66,7 +66,7 @@ const App = () => {
       <div>
         filter shown in: 
         <input 
-          value={newFilter}
+          value={filter}
           onChange={handleFilterChange}
         />
       </div>
