@@ -20,7 +20,6 @@ const PersonForm = ({ addPerson, newName, handleNameChange, newNumber, handleNum
   )
 };
 
-
 const Filter = ({filter, handleFilterChange}) => {
   return (
     <div>
@@ -33,11 +32,18 @@ const Filter = ({filter, handleFilterChange}) => {
   )
 }
 
-const Persons = ({search}) => {
+const Person = ({person}) => {
   return(
-    <ul>
-    {search.map(person => <li key={person.name}> {person.name} {person.number}</li>)} 
-    </ul>
+    <div> {person.name} {person.number}</div>
+  )
+}
+
+
+const Persons = ({persons}) => {
+  return(
+    <div>
+      {persons.map(person => <Person key={person.name} person={person}/>)} 
+    </div>
   )
 }
 
@@ -53,11 +59,11 @@ const App = () => {
     { name: 'Barto Hellas',
       number: '123456'
     },
-  ]) 
+  ])
+
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [search, setSearch] = useState(persons)
 
 
   const handleNameChange = (event) => {
@@ -69,15 +75,12 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    const filt = event.target.value
-    setFilter(filt);
-    if(event.target.value != ''){
-      setSearch(persons.filter(person => person.name.toLowerCase().startsWith(filt.toLowerCase())))
-    }
-    else{
-      setSearch(persons)
-    }
-  }
+    setFilter(event.target.value);
+  };
+
+  const filteredPersons = persons.filter(person =>
+    person.name.toLowerCase().startsWith(filter.toLowerCase())
+  );
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -111,7 +114,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons search={search}/>
+      <Persons persons={filteredPersons}/>
     </div>
   )
 }
