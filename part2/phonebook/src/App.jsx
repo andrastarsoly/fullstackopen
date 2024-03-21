@@ -1,66 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import axios from 'axios'
 
-const PersonForm = ({ addPerson, newName, handleNameChange, newNumber, handleNumberChange }) => {
-  return (
-    <form onSubmit={addPerson}>
-    <div>
-      name:
-      <input
-      value={newName}
-      onChange={handleNameChange}
-    />
-    <div>number: 
-    <input 
-      value={newNumber}
-      onChange={handleNumberChange}/>
-    </div>
-    </div>
-    <button type="submit">add</button>
-  </form>
-  )
-};
-
-const Filter = ({filter, handleFilterChange}) => {
-  return (
-    <div>
-      filter shown in: 
-      <input 
-        value={filter}
-        onChange={handleFilterChange}
-      />
-    </div>
-  )
-}
-
-const Person = ({person}) => {
-  return(
-    <div> {person.name} {person.number}</div>
-  )
-}
-
-
-const Persons = ({persons}) => {
-  return(
-    <div>
-      {persons.map(person => <Person key={person.name} person={person}/>)} 
-    </div>
-  )
-}
 
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '123456'
-    },
-    { name: 'Artur Hellas',
-      number: '12342'
-    },
-    { name: 'Barto Hellas',
-      number: '123456'
-    },
-  ])
-
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
@@ -100,6 +47,17 @@ const App = () => {
       alert(`${personObject.name} is already added to the phonebook`)
     }
   }
+
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
+
+
 
   return (
     <div>
