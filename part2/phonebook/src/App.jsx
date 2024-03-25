@@ -3,8 +3,7 @@ import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import axios from 'axios'
-
-
+import personService from './services/personService'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -39,9 +38,13 @@ const App = () => {
     const found = persons.find((element) => element.name === personObject.name);
 
     if(found === undefined){
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+      personService
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      })
     }
     else{
       alert(`${personObject.name} is already added to the phonebook`)
@@ -50,11 +53,11 @@ const App = () => {
 
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
+    personService
+    .getAll()
+    .then(initialPersons => {
+      setPersons(initialPersons)
+    })
   }, [])
 
 
