@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
-import axios from 'axios'
 import personService from './services/personService'
 
 const App = () => {
@@ -24,6 +23,7 @@ const App = () => {
     setFilter(event.target.value);
   };
 
+
   const filteredPersons = persons.filter(person =>
     person.name.toLowerCase().startsWith(filter.toLowerCase())
   );
@@ -36,7 +36,7 @@ const App = () => {
     }
   
     const found = persons.find((element) => element.name === personObject.name);
-
+    console.log(found)
     if(found === undefined){
       personService
       .create(personObject)
@@ -47,9 +47,30 @@ const App = () => {
       })
     }
     else{
-      alert(`${personObject.name} is already added to the phonebook`)
+      window.confirm(`${personObject.name} is already added to the phonebook, replace the old number with a new one?`) ? 
+      personService
+        .update(found.id,personObject)
+        .then(returnedPerson => {
+          const foundPersonIndex = persons.findIndex((element) => element.name === returnedPerson.name)
+          const updated = [...persons]
+          updated[foundPersonIndex] = returnedPerson
+          setPersons(updated)
+          setNewName('')
+          setNewNumber('')
+        })
+      :
+      console.log("no")
     }
   }
+
+
+
+  const deletePerson = (id) => {
+    personService
+      .remove(id)
+      .then()
+  } 
+
 
 
   useEffect(() => {
@@ -75,7 +96,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons}/>
+      <Persons persons={filteredPersons} deletePerson={deletePerson}/>
     </div>
   )
 }
