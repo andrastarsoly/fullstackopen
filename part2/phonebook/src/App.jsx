@@ -36,7 +36,6 @@ const App = () => {
     }
   
     const found = persons.find((element) => element.name === personObject.name);
-    console.log(found)
     if(found === undefined){
       personService
       .create(personObject)
@@ -59,16 +58,24 @@ const App = () => {
           setNewNumber('')
         })
       :
-      console.log("no")
+      console.log("no update")
     }
   }
 
 
 
   const deletePerson = (id) => {
+    const deletingPerson =  persons.find((element) => element.id === id);
+    window.confirm(`Delete ${deletingPerson.name}?`) ? 
     personService
       .remove(id)
-      .then()
+      .then(()=>{
+        const filtered = persons.filter((element) => element.id !== id)
+        setPersons(filtered);
+      }
+      )
+    :
+    console.log("no delete")
   } 
 
 

@@ -1,0 +1,22 @@
+{
+  "name": "part3",
+  "version": "1.0.0",
+  "description": "fullstackopen part3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrastarsoly/fullstackopen.git"
+  },
+  "keywords": [
+    "fullstackopen"
+  ],
+  "author": "Andras Tarsoly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrastarsoly/fullstackopen/issues"
+  },
+  "homepage": "https://github.com/andrastarsoly/fullstackopen#readme"
+}
