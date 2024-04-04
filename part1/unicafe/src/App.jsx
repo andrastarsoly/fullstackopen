@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
-const StatisticLine  = ({ text, counter }) => <p> {text} {counter}</p>
+const StatisticLine  = ({ text, counter }) => <tr><td>{text}</td><td>{counter}</td></tr>
 
 const Statistics = (props) => {
   return(
@@ -16,12 +16,16 @@ const Statistics = (props) => {
       </div>
       :
       <div>
-        <StatisticLine text="good" counter={props.good}/>
-        <StatisticLine text="neutral" counter={props.neutral}/>
-        <StatisticLine text="bad" counter={props.bad}/>
-        <StatisticLine text="all" counter={props.good + props.neutral + props.bad}/>
-        <StatisticLine text="avarage" counter={(props.good - props.bad)/(props.good + props.neutral + props.bad)}/>
-        <StatisticLine text="positive" counter={(props.good / (props.good + props.neutral + props.bad))*100 + "%"}/> 
+        <table>
+          <tbody>
+          <StatisticLine text="good" counter={props.good}/>
+          <StatisticLine text="neutral" counter={props.neutral}/>
+          <StatisticLine text="bad" counter={props.bad}/>
+          <StatisticLine text="all" counter={props.good + props.neutral + props.bad}/>
+          <StatisticLine text="avarage" counter={(props.good - props.bad)/(props.good + props.neutral + props.bad)}/>
+          <StatisticLine text="positive" counter={(props.good / (props.good + props.neutral + props.bad))*100 + "%"}/>
+          </tbody>
+        </table>
       </div>
     }
     </div>
