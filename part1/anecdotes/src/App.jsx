@@ -50,15 +50,16 @@ const App = () => {
       <br/>
       <div>has {allPoints[selected]} votes</div>
       <Button 
-        handleClick = {handleRandomVote}
-        text="next anecdote"
-      />
-      <Button 
         handleClick = {handleVote}
         text="vote"
       />
+      <Button 
+        handleClick = {handleRandomVote}
+        text="next anecdote"
+      />
       <h1>Anecdote with the most votes</h1>
       {anecdotes[maxIndex]}
+      <div>has {allPoints[maxIndex]} votes</div>
     </div>
   )
 }
