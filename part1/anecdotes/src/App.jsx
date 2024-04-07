@@ -7,6 +7,15 @@ const Button = (props) => (
   </button>
 )
 
+const Anecdote = (props) => {
+  return(
+  <>
+    <p>{props.anecdote}</p>
+    <p>has {props.allPoints} votes</p>
+  </>
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -46,9 +55,7 @@ const App = () => {
   return (
     <div>
       <h1>Anecdote of the day</h1>
-      {anecdotes[selected]}
-      <br/>
-      <div>has {allPoints[selected]} votes</div>
+      <Anecdote anecdote={anecdotes[selected]} allPoints={allPoints[selected]}/>
       <Button 
         handleClick = {handleVote}
         text="vote"
@@ -58,8 +65,7 @@ const App = () => {
         text="next anecdote"
       />
       <h1>Anecdote with the most votes</h1>
-      {anecdotes[maxIndex]}
-      <div>has {allPoints[maxIndex]} votes</div>
+      <Anecdote anecdote={anecdotes[maxIndex]} allPoints={allPoints[maxIndex]}/>
     </div>
   )
 }
