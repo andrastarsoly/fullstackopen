@@ -12,7 +12,7 @@ const Part = (props) => {
 const Header = (props) => {
   return (
     <div>
-      <p>{props.course.name}</p>
+      <h1>{props.course.name}</h1>
     </div>
   )
 }
