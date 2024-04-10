@@ -55,14 +55,3 @@ const App = () => {
 }
 
 export default App
-
-/*
-
-App
-  Course
-    Header
-    Content
-      Part
-      Part
-
-*/
