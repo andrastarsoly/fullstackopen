@@ -18,11 +18,6 @@ function App() {
   };
 
 
-  const getAll = () => {
-    const request = axios.get(baseUrl)
-    return request.then(response => response.data)
-  }
-
   useEffect(() => {
     countryService
     .getAll()
@@ -32,6 +27,8 @@ function App() {
   }, [])
 
   console.log(world)
+
+
 
   return (
     <>
