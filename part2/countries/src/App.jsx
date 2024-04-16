@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import axios from 'axios'
 import { useEffect } from 'react'
 import countryService from './countryService'
 import CountryList from './components/CountryList'
-import Country from './components/Country'
+
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
   }, [])
 
   console.log(world)
-
 
 
   return (
