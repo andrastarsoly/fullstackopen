@@ -28,6 +28,11 @@ function App() {
   }, [])
 
 
+  const show = () => {
+    console.log("shoooooow")
+    //todo set filtered:
+  }
+
   return (
     <>
       <div>
@@ -43,7 +48,7 @@ function App() {
         {filtered.length == 1 ? 
           <DetailedCountry country={filtered}/>
         : (filtered.length < 10 && filtered.length > 1) ?  
-          <CountryList world={filtered}/>
+          <CountryList world={filtered} show={show}/>
         : 'Too many matches, specify another filter' 
         }
       </div>
