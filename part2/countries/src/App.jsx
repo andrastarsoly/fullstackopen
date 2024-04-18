@@ -3,10 +3,6 @@ import countryService from './services/countryService'
 import CountryList from './components/CountryList'
 import DetailedCountry from './components/DetailedCountry'
 
-
-
-
-
 function App() {
 
   const [country, setCountry] = useState('')
@@ -16,7 +12,7 @@ function App() {
     setCountry(event.target.value);
   };
 
-  
+
   const filtered = world.filter(c =>
     c.name.common.toLowerCase().includes((country.toLowerCase()))
   )
@@ -28,7 +24,6 @@ function App() {
       setWorld(initWorld)
     })
   }, [])
-
 
   return (
     <>

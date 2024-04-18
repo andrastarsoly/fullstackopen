@@ -1,13 +1,28 @@
+import { useState,useEffect } from "react";
+import weatherService from "../services/weatherService";
+
+
+
 const DetailedCountry = ({country}) => {
 
     const c = country[0];
+    const capital = country[0].capital
 
-console.log(Object.entries(c.languages))
+    const [weather, setWeather] = useState('')
+
+    useEffect(() => {
+        weatherService
+        .getWeather(capital)
+        .then(w => {
+            setWeather(w)
+        })
+    }, [])
+
 
     return(
         <div>
             <h1>{c.name.common}</h1>
-            <p>capital {c.capital}</p>
+            <p>capital {capital}</p>
             <p>area {c.area}</p>
             <h2>Languages:</h2>
             <ul>
@@ -16,6 +31,10 @@ console.log(Object.entries(c.languages))
             ))}
             </ul>
             <p><img src={c.flags.png} alt={c.flags.alt} /></p>
+            <div>
+                <h2>Weather in {capital}</h2>
+
+            </div>
         </div>
     )
 
