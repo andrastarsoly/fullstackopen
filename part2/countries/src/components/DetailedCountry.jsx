@@ -2,18 +2,20 @@ const DetailedCountry = ({country}) => {
 
     const c = country[0];
 
-console.log(c.languages)
+console.log(Object.entries(c.languages))
 
     return(
         <div>
+            <h1>{c.name.common}</h1>
             <p>capital {c.capital}</p>
             <p>area {c.area}</p>
-            {c.languages.length < 2 ? 
-                c.languages
-            :
-                c.languages.map(([code, lang]) => <li key = {code}> {lang}</li>)
-            }
-            <p><img src={c.flags.png} alt="My PNG Image" /></p>
+            <h2>Languages:</h2>
+            <ul>
+            {Object.entries(c.languages).map(([code, name]) => (
+            <li key={code}>{name}</li>
+            ))}
+            </ul>
+            <p><img src={c.flags.png} alt={c.flags.alt} /></p>
         </div>
     )
 
