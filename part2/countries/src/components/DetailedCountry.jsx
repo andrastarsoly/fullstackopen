@@ -8,7 +8,7 @@ const DetailedCountry = ({country}) => {
     const c = country[0];
     const capital = country[0].capital
 
-    const [weather, setWeather] = useState('')
+    const [weather, setWeather] = useState(null)
 
     useEffect(() => {
         weatherService
@@ -17,6 +17,11 @@ const DetailedCountry = ({country}) => {
             setWeather(w)
         })
     }, [])
+
+//     <img src = {`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} />           
+if(weather){
+    console.log(weather)
+}
 
 
     return(
@@ -31,9 +36,16 @@ const DetailedCountry = ({country}) => {
             ))}
             </ul>
             <p><img src={c.flags.png} alt={c.flags.alt} /></p>
+            <div>{weather != null ?
             <div>
                 <h2>Weather in {capital}</h2>
-
+                <p>temperature: {Math.floor(weather.main.temp - 273)} Celsius</p>
+                <img src = {`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} />
+                <p>wind {weather.wind.speed} m/s</p>
+            </div>
+            :
+            <p>loading</p>
+            }
             </div>
         </div>
     )

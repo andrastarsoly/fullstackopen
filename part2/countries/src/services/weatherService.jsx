@@ -4,7 +4,6 @@ const api_key = import.meta.env.VITE_OPEN_WEATHER
 
 const getWeather = (city) => {
   const request = axios.get(`${baseUrl}/weather?q=${city}&appid=${api_key}`)
-  console.log(api_key)
   return request.then(response => response.data)
 }
 
