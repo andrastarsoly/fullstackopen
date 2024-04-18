@@ -18,11 +18,6 @@ const DetailedCountry = ({country}) => {
         })
     }, [])
 
-//     <img src = {`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} />           
-if(weather){
-    console.log(weather)
-}
-
 
     return(
         <div>
