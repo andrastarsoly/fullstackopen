@@ -1,21 +1,23 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import countryService from './countryService'
+import { useState, useEffect } from 'react'
+import countryService from './services/countryService'
 import CountryList from './components/CountryList'
+import DetailedCountry from './components/DetailedCountry'
 
 
 function App() {
 
-  const [country, setCountry] = useState(0)
+  const [country, setCountry] = useState('')
   const [world, setWorld] = useState([])
 
 
   const onSearch = (event) => {
-    const newValue = event.target.value;
-    setCountry(newValue);
-    console.log(newValue);
+    setCountry(event.target.value);
   };
 
+
+  const filtered = world.filter(c =>
+    c.name.common.toLowerCase().includes((country.toLowerCase()))
+  );
 
   useEffect(() => {
     countryService
@@ -24,8 +26,6 @@ function App() {
       setWorld(initWorld)
     })
   }, [])
-
-  console.log(world)
 
 
   return (
@@ -40,7 +40,12 @@ function App() {
       </form>
       </div>
       <div>
-      <CountryList world={world}/>
+        {filtered.length == 1 ? 
+          <DetailedCountry country={filtered}/>
+        : (filtered.length < 10 && filtered.length > 1) ?  
+          <CountryList world={filtered}/>
+        : 'Too many matches, specify another filter' 
+        }
       </div>
     </>
   )
