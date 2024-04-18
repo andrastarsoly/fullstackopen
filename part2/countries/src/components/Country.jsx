@@ -1,7 +1,7 @@
-const Country = ({country, show}) => {
+const Country = ({country, setCountry}) => {
     return (
         <div>
-            {country.name.common} <button onClick={show}>show</button>
+            {country.name.common} <button onClick={()=>setCountry(country.name.common)}>show</button>
         </div>
     )
 }

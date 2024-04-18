@@ -4,20 +4,22 @@ import CountryList from './components/CountryList'
 import DetailedCountry from './components/DetailedCountry'
 
 
+
+
+
 function App() {
 
   const [country, setCountry] = useState('')
   const [world, setWorld] = useState([])
 
-
   const onSearch = (event) => {
     setCountry(event.target.value);
   };
 
-
+  
   const filtered = world.filter(c =>
     c.name.common.toLowerCase().includes((country.toLowerCase()))
-  );
+  )
 
   useEffect(() => {
     countryService
@@ -27,11 +29,6 @@ function App() {
     })
   }, [])
 
-
-  const show = () => {
-    console.log("shoooooow")
-    //todo set filtered:
-  }
 
   return (
     <>
@@ -48,7 +45,7 @@ function App() {
         {filtered.length == 1 ? 
           <DetailedCountry country={filtered}/>
         : (filtered.length < 10 && filtered.length > 1) ?  
-          <CountryList world={filtered} show={show}/>
+          <CountryList world={filtered} setCountry={setCountry}/>
         : 'Too many matches, specify another filter' 
         }
       </div>

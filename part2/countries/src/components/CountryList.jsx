@@ -1,10 +1,10 @@
 import Country from "./Country"
 
 
-const CountryList = ({world, show}) => {
+const CountryList = ({world, setCountry}) => {
     return (
         <div>
-            {world.map(country => <Country key = {country.name.common} country = {country} show={show}/>)}
+            {world.map(country => <Country key = {country.name.common} country = {country} setCountry={setCountry}/>)}
         </div>
     )
 }
